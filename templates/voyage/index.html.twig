@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voyage index{% endblock %}
+
+{% block body %}
+    <h1>Voyage index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Accroche</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Duree</th>
+                <th>Image1</th>
+                <th>Image2</th>
+                <th>Image3</th>
+                <th>Brochure</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voyage in voyages %}
+            <tr>
+                <td>{{ voyage.id }}</td>
+                <td>{{ voyage.nom }}</td>
+                <td>{{ voyage.accroche }}</td>
+                <td>{{ voyage.description }}</td>
+                <td>{{ voyage.prix }}</td>
+                <td>{{ voyage.duree }}</td>
+                <td>{{ voyage.image1 }}</td>
+                <td>{{ voyage.image2 }}</td>
+                <td>{{ voyage.image3 }}</td>
+                <td>{{ voyage.brochure }}</td>
+                <td>
+                    <a href="{{ path('voyage_show', {'id': voyage.id}) }}">show</a>
+                    <a href="{{ path('voyage_edit', {'id': voyage.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('voyage_new') }}">Create new</a>
+{% endblock %}
