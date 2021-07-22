@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-#[Route('/voyage')]
+#[Route('/admin/voyage')]
 class VoyageController extends AbstractController
 {
     #[Route('/', name: 'voyage_index', methods: ['GET'])]
@@ -93,14 +93,6 @@ class VoyageController extends AbstractController
             }
 
 
-
-
-
-
-
-
-
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($voyage);
             $entityManager->flush();
@@ -129,6 +121,9 @@ class VoyageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+
+            dump($voyage->getNom());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('voyage_index', [], Response::HTTP_SEE_OTHER);
