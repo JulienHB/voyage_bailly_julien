@@ -12,12 +12,7 @@
                 <th>Nom</th>
                 <th>Accroche</th>
                 <th>Description</th>
-                <th>Prix</th>
-                <th>Duree</th>
-                <th>Image1</th>
-                <th>Image2</th>
-                <th>Image3</th>
-                <th>Brochure</th>
+                
                 <th>actions</th>
             </tr>
         </thead>
@@ -28,12 +23,7 @@
                 <td>{{ voyage.nom }}</td>
                 <td>{{ voyage.accroche }}</td>
                 <td>{{ voyage.description }}</td>
-                <td>{{ voyage.prix }}</td>
-                <td>{{ voyage.duree }}</td>
-                <td>{{ voyage.image1 }}</td>
-                <td>{{ voyage.image2 }}</td>
-                <td>{{ voyage.image3 }}</td>
-                <td>{{ voyage.brochure }}</td>
+                
                 <td>
                     <a href="{{ path('voyage_show', {'id': voyage.id}) }}">show</a>
                     <a href="{{ path('voyage_edit', {'id': voyage.id}) }}">edit</a>

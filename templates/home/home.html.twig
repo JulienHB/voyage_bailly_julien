@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<img class="img-fluid" src="{{ asset('images/logo.png')}}" width="200">
+<div class="container">
+{% for voyage in voyages %}
+
+
+    {{ dump(voyage) }}
+
+
+<div class="col">
+<img class="img-fluid" src="{{ asset('upload/'~ voyage.image1)}}" width="200">
+<h2>{{voyage.nom}}</h2>
+<h3>Catégorie de voyage : {{voyage.idCat.nom}}</h3>
+<h4>Tags </h4>
+<hr>
+<p>{{voyage.accroche}}</p>
+<p>Tarif :{{voyage.prix}} € par personne</p>
+<a href="{{ path('detailVoyage', {'id': voyage.id}) }}">En savoir plus</a>
+
+
+
+</div>    
+{% endfor %}
+</div>
+
+
+{% endblock %}

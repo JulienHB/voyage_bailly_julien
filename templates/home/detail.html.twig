@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container">
+
+
+<div class="col">
+<img class="img-fluid" src="{{ asset('upload/'~ voyage.image1)}}" width="500">
+<h2>{{voyage.nom}}</h2>
+
+<img class="img-fluid" src="{{ asset('upload/'~ voyage.image2)}}" width="300">
+<img class="img-fluid" src="{{ asset('upload/'~ voyage.image3)}}" width="300">
+
+
+<h3>Catégorie de voyage : {{voyage.idCat.nom}}</h3>
+
+<hr>
+<p>{{voyage.accroche}}</p>
+<hr>
+<p>{{voyage.description}}</p>
+<hr>
+<p>Tarif : {{voyage.prix}} € par personne</p>
+<p>Cout pour deux personnes : {{voyage.prix*2}} €</p>
+<p>Tarif pour quatres personnes : {{voyage.prix*4}} €</p>
+
+<p>Tags </p>
+
+<a href="{{ path('home') }}">Retour à la liste des Voyages</a>
+
+{% endblock %}
