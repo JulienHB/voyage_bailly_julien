@@ -32,6 +32,9 @@ class VoyageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            var_dump($form->get('tags')->getData());
+            die();
 
             $image1 = $form -> get('image1')->getData();
             $image2 = $form -> get('image2')->getData();
@@ -115,15 +118,76 @@ class VoyageController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'voyage_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Voyage $voyage): Response
+    public function edit(Request $request, Voyage $voyage, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(VoyageType::class, $voyage);
+        $img1src=$voyage->getImage1();
+        $img2src=$voyage->getImage2();
+        $img3src=$voyage->getImage3();
+        $pdfsrc=$voyage->getBrochure();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
+            if($voyage->getImage1() != $img1src) {
+                $image1 = $form -> get('image1')->getData();
+                $originalFileName = pathinfo($image1->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName.'-'.uniqid().'.'.$image1->guessExtension();
 
-            dump($voyage->getNom());
+                try {
+                    $image1->move($this ->getParameter('upload_directory'), $newFileName);
+                }
+                catch (FileException $e) {
+                    var_dump($e);
+                }
+                $voyage->setImage1($newFileName);
+            }
+            if($voyage->getImage2() != $img2src) {
+                $image2 = $form -> get('image2')->getData();
+                $originalFileName = pathinfo($image2->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName.'-'.uniqid().'.'.$image2->guessExtension();
+
+                try {
+                    $image2->move($this ->getParameter('upload_directory'), $newFileName);
+                }
+                catch (FileException $e) {
+                    var_dump($e);
+                }
+                $voyage->setImage2($newFileName);
+            }
+            if($voyage->getImage3() != $img3src) {
+                $image3 = $form -> get('image3')->getData();
+                $originalFileName = pathinfo($image3->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName.'-'.uniqid().'.'.$image3->guessExtension();
+
+                try {
+                    $image3->move($this ->getParameter('upload_directory'), $newFileName);
+                }
+                catch (FileException $e) {
+                    var_dump($e);
+                }
+                $voyage->setImage3($newFileName);
+            }
+
+            if($voyage->getBrochure() !=  $pdfsrc) {
+                $pdf = $form -> get('brochure')->getData();
+                $originalFileName = pathinfo($pdf->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName.'-'.uniqid().'.'.$pdf->guessExtension();
+
+                try {
+                    $pdf->move($this ->getParameter('upload_directory'), $newFileName);
+                }
+                catch (FileException $e) {
+                    var_dump($e);
+                }
+                $voyage->setBrochure($newFileName);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('voyage_index', [], Response::HTTP_SEE_OTHER);
