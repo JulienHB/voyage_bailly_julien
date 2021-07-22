@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Voyage;
+use App\Entity\Tag;
 use App\Form\VoyageType;
 use App\Repository\VoyageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

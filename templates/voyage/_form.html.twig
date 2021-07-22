@@ -1,4 +1,21 @@
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+<div class="container">
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+            {{ form_row(form.idCat, {label: 'Categorie du voyage :' }) }}  
+            {{ form_row(form.tags, {label: 'Categorie du voyage : (Maintenir maj enfoncé pour choix multiple)' }) }}
+              <hr>
+            {{ form_row(form.nom, {label: 'Nom du séjour :' }) }}
+            {{ form_row(form.accroche,{'attr' :{'placeholder' :'Synthèse du voyage'},'label' : 'Accroche : '}) }}
+            {{ form_row(form.description,{'attr' :{'placeholder' :'Description exhaustive du Voyage'},'label' : 'Description'}) }}         
+            {{ form_row(form.prix,{'attr' :{'placeholder' :'Tarif par personne '},'label' : 'Tarif '}) }}
+            <hr>
+            {{ form_row(form.duree, {label: 'Durée en jour du voyage :' }) }}
+            {{ form_row(form.image1, {label: 'URL de l\'image principale' }) }}
+            {{ form_row(form.image2, {label: 'URL de l\'image secondaire' }) }}
+            {{ form_row(form.image3, {label: 'URL de la troisème image' }) }} 
+            {{ form_row(form.brochure, {label: 'URL du Catalogue produit' }) }}
+               
+            <button type="submit" class="btn btn-primary">enregistrer</button> 
 {{ form_end(form) }}
+</div>
