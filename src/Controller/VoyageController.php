@@ -32,10 +32,7 @@ class VoyageController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            var_dump($form->get('tags')->getData());
-            die();
-
+                      
             $image1 = $form -> get('image1')->getData();
             $image2 = $form -> get('image2')->getData();
             $image3 = $form -> get('image3')->getData();
@@ -93,6 +90,11 @@ class VoyageController extends AbstractController
                     var_dump($e);
                 }
                 $voyage->setBrochure($newFileName);
+            }
+
+            $tags=$form->get('tags')->getData();
+            foreach ($tags as $tag) {
+                $voyage->addTag($tag);
             }
 
 

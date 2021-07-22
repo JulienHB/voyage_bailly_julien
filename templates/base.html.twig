@@ -8,9 +8,11 @@
     <link rel="short icon" href="{{ asset('images/logo.png') }}"><title>Voyage Voyages</title>
     </head>
     <body>
+    <div>
     <p>Log : root@root</p>
     <p>password : 123456</p>
     <a href="{{ path('app_login') }}">Identification</a>
+    </div>
     {% if app.user %}
         <div class="mb-3">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>

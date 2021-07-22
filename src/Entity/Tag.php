@@ -63,6 +63,7 @@ class Tag
     {
         if (!$this->lien->contains($lien)) {
             $this->lien[] = $lien;
+            $lien->addTag($this);
         }
 
         return $this;
@@ -71,6 +72,7 @@ class Tag
     public function removeLien(Voyage $lien): self
     {
         $this->lien->removeElement($lien);
+        $lien->removeTag($this);
 
         return $this;
     }
